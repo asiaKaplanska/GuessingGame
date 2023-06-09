@@ -1,5 +1,10 @@
 package org.asia.game;
 
+import org.asia.game.result.GameResult;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 public class GameUI {
 
     private static final String INSERT_USER_INPUT = ", enter the number of eggs >>> ";
@@ -26,6 +31,10 @@ public class GameUI {
     private static final String INPUT_PLAY_GAME_RESPONSE = "You can only enter 'y' or 'n'!";
     private static final String PREVIOUS_RESULTS = "Here are all the results of previous games: ";
     private static final String START_GAME = "Let's start!";
+    private static final String GAME_RESULT_IN_MEMORY = "Player name: %s, score: %s, date of game: %s";
+    private static final String FILE_NOT_EXIST = "This file don't exist";
+    private static final String INPUT_WAY_OF_SAVING_FILE = "You an only enter 'm' or 'j'!";
+    private static final String SAVE_FILE = "Want to save your game result to file? If YES choose 'j' or 'm' if just save in memory";
 
 
     public void printInsertInputMessage() {
@@ -108,4 +117,13 @@ public class GameUI {
         System.out.println(START_GAME);
     }
 
+    public void printGameResultInMemory(String playerName, int playerScore, LocalDateTime dateOfGame) {
+
+        System.out.println(GAME_RESULT_IN_MEMORY.formatted(playerName, playerScore, dateOfGame));
+    }
+
+    public void printGameResultJsonFile (List<GameResult> gameResults) {
+
+        System.out.println(gameResults.toString());
+    }
 }

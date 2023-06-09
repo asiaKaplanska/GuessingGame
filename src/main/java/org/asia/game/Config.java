@@ -19,5 +19,8 @@ public class Config {
     public static final String YES_RESPONSE = "y";
     public static final String NO_RESPONSE = "n";
 
+    public static final String DIRECTORY_PATH = System.getProperty("user.home") + "/GameResults/";
+    public static final String FILE_PATH = DIRECTORY_PATH + "myFile.json";
 
+    public final static String REPOSITORY_DESTINATION_KEY = "RepositoryDestination";
 }

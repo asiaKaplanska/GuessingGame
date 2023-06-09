@@ -34,8 +34,8 @@ public class GameLoop {
 
     private void printAllPreviousResults() {
 
-        JSONFile jsonFile = new JSONFile();
-        jsonFile.deserialize();
+        var listOfPreviousResults = gameResultRepository.getAllGameResults();
+        gameUI.printGameResultJsonFile(listOfPreviousResults);
     }
 
     public boolean playGame() {
@@ -69,8 +69,8 @@ public class GameLoop {
         gameUI.printCollectedPointsMessage(gameState.getUserName(), gameState.getUserScore());
         gameUI.printEmptyRow();
         GameResult gameResult = new GameResult(gameState.getUserName(), gameState.getUserScore(), LocalDateTime.now());
-        JSONFile jsonFile = new JSONFile();
-        jsonFile.serialise(gameResult);
+        gameResultRepository.saveGameResult(gameResult);
+
         gameUI.printEmptyRow();
 
         gameUI.printPreviousGameResults();
