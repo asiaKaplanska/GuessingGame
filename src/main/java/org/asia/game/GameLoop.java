@@ -1,5 +1,8 @@
 package org.asia.game;
 
+import org.asia.game.result.GameResult;
+import org.asia.game.result.GameResultRepository;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -10,6 +13,11 @@ public class GameLoop {
     private InputSystem inputSystem = InputSystem.getInstance();
     private NumberGenerator numberGenerator = new NumberGenerator();
     private ScoreSystem scoreSystem = new ScoreSystem();
+    private final GameResultRepository gameResultRepository;
+
+    public GameLoop(GameResultRepository gameResultRepository) {
+        this.gameResultRepository = gameResultRepository;
+    }
 
     public void playIntro() {
 

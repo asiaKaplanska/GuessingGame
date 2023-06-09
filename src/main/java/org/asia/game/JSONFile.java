@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.asia.game.result.GameResult;
 
 import java.io.*;
 import java.util.List;
@@ -37,6 +38,7 @@ public class JSONFile {
     public String loadResultsFile() {
 
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/myFile.json");
+        //ToDo: add separate directory to save file, outside of the project folder!!!!
         assert inputStream != null;
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
