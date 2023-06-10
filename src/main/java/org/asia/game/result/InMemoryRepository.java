@@ -9,6 +9,7 @@ class InMemoryRepository implements GameResultRepository{
 
     GameUI gameUI = new GameUI();
     private final List<GameResult> results = new ArrayList<>();
+
     @Override
     public void saveGameResult(GameResult gameResult) {
 

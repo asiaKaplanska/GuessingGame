@@ -9,15 +9,15 @@ public class GameUI {
 
     private static final String INSERT_USER_INPUT = ", enter the number of eggs >>> ";
     private static final String GAME_DESCRIPTION = """
-            
+                        
             Welcome to the game!
-            
+                        
             Here are the rules:
             The game generates a random number of eggs laid by the hen (from 1 to %s) that you have to guess.
             You get points if you correctly guess the number of eggs laid (5 points for each correct answer).
             In addition, 2 wins in a row give you an additional 10 points, 3 wins in a row give you 100 points
             and 4 correct answers give you 1000 extra points!
-            
+                        
             Good luck :)
             """.formatted(Config.MAX_VALUE_DRAWING);
     private static final String INSERT_USER_NAME = "What's Your name? ";
@@ -32,10 +32,17 @@ public class GameUI {
     private static final String PREVIOUS_RESULTS = "Here are all the results of previous games: ";
     private static final String START_GAME = "Let's start!";
     private static final String GAME_RESULT_IN_MEMORY = "Player name: %s, score: %s, date of game: %s";
-    private static final String FILE_NOT_EXIST = "This file don't exist";
-    private static final String INPUT_WAY_OF_SAVING_FILE = "You an only enter 'm' or 'j'!";
-    private static final String SAVE_FILE = "Want to save your game result to file? If YES choose 'j' or 'm' if just save in memory";
+    private static final String SAVING_RESULT_FAILED = "Saving failed";
+    private static final String LIST_NOT_EXIST = "List of results don't exist";
 
+    public void printListNotExist() {
+
+        System.out.println(LIST_NOT_EXIST);
+    }
+    public void printSavingFailed() {
+
+        System.out.println(SAVING_RESULT_FAILED);
+    }
 
     public void printInsertInputMessage() {
 
@@ -122,7 +129,7 @@ public class GameUI {
         System.out.println(GAME_RESULT_IN_MEMORY.formatted(playerName, playerScore, dateOfGame));
     }
 
-    public void printGameResultJsonFile (List<GameResult> gameResults) {
+    public void printGameResultJsonFile(List<GameResult> gameResults) {
 
         System.out.println(gameResults.toString());
     }

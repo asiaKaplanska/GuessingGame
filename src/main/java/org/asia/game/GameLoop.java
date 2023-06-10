@@ -1,5 +1,6 @@
 package org.asia.game;
 
+import org.asia.game.result.GameRepositoryProcessingException;
 import org.asia.game.result.GameResult;
 import org.asia.game.result.GameResultRepository;
 
@@ -34,8 +35,12 @@ public class GameLoop {
 
     private void printAllPreviousResults() {
 
-        var listOfPreviousResults = gameResultRepository.getAllGameResults();
-        gameUI.printGameResultJsonFile(listOfPreviousResults);
+        try {
+            var listOfPreviousResults = gameResultRepository.getAllGameResults();
+            gameUI.printGameResultJsonFile(listOfPreviousResults);
+        } catch (GameRepositoryProcessingException exception) {
+            gameUI.printListNotExist();
+        }
     }
 
     public boolean playGame() {
@@ -69,7 +74,7 @@ public class GameLoop {
         gameUI.printCollectedPointsMessage(gameState.getUserName(), gameState.getUserScore());
         gameUI.printEmptyRow();
         GameResult gameResult = new GameResult(gameState.getUserName(), gameState.getUserScore(), LocalDateTime.now());
-        gameResultRepository.saveGameResult(gameResult);
+        saveResult(gameResult);
 
         gameUI.printEmptyRow();
 
@@ -83,5 +88,15 @@ public class GameLoop {
         gameUI.printPlayAgainMessage();
         var userInput = inputSystem.getUserPlayingDecision();
         return Objects.equals(userInput, Config.YES_RESPONSE);
+    }
+
+    private void saveResult(GameResult gameResult) {
+
+        try {
+            gameResultRepository.saveGameResult(gameResult);
+        } catch (GameRepositoryProcessingException e) {
+            gameUI.printSavingFailed();
+        }
+
     }
 }

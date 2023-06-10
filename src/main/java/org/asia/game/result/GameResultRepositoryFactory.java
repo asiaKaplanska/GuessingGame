@@ -1,5 +1,9 @@
 package org.asia.game.result;
 
+import org.asia.game.Config;
+
+import java.nio.file.Path;
+
 public class GameResultRepositoryFactory {
 
     private final Destination destination;
@@ -16,8 +20,7 @@ public class GameResultRepositoryFactory {
     public GameResultRepository newRepository() {
 
         return switch (destination) {
-            case FILE -> new JsonFileRepository();
-           // case IN_MEMORY -> new InMemoryRepository();
+            case FILE -> new JsonFileRepository(Path.of(Config.FILE_PATH));
             default -> new InMemoryRepository();
         };
     }

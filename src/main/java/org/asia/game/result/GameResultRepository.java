@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface GameResultRepository {
 
-    void saveGameResult(GameResult gameResult);
+    void saveGameResult(GameResult gameResult) throws GameRepositoryProcessingException;
 
-    List<GameResult> getAllGameResults();
+    List<GameResult> getAllGameResults() throws GameRepositoryProcessingException;
 }
