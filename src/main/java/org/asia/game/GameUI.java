@@ -131,6 +131,9 @@ public class GameUI {
 
     public void printGameResultJsonFile(List<GameResult> gameResults) {
 
-        System.out.println(gameResults.toString());
+        for (var result : gameResults)
+        {
+            System.out.println(result.toString());
+        }
     }
 }
