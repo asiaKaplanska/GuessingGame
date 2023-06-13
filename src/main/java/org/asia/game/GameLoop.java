@@ -36,8 +36,7 @@ public class GameLoop {
     private void printAllPreviousResults() {
 
         try {
-            var listOfPreviousResults = gameResultRepository.getAllGameResults();
-            gameUI.printGameResultJsonFile(listOfPreviousResults);
+            gameUI.printGameResultJsonFile(gameResultRepository.getAllGameResults());
         } catch (GameRepositoryProcessingException exception) {
             gameUI.printListNotExist();
         }

@@ -2,7 +2,6 @@ package org.asia.game;
 
 import org.asia.game.result.GameResult;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class GameUI {
@@ -31,7 +30,6 @@ public class GameUI {
     private static final String INPUT_PLAY_GAME_RESPONSE = "You can only enter 'y' or 'n'!";
     private static final String PREVIOUS_RESULTS = "Here are all the results of previous games: ";
     private static final String START_GAME = "Let's start!";
-    private static final String GAME_RESULT_IN_MEMORY = "Player name: %s, score: %s, date of game: %s";
     private static final String SAVING_RESULT_FAILED = "Saving failed";
     private static final String LIST_NOT_EXIST = "List of results don't exist";
 
@@ -104,16 +102,6 @@ public class GameUI {
         System.out.println(INPUT_PLAY_GAME_RESPONSE);
     }
 
-    public void printSerialisedJson(String string) {
-
-        System.out.println(string);
-    }
-
-    public void printDeserializedFile(String string) {
-
-        System.out.println(string);
-    }
-
     public void printPreviousGameResults() {
 
         System.out.print(PREVIOUS_RESULTS);
@@ -122,11 +110,6 @@ public class GameUI {
     public void printLetsStart() {
 
         System.out.println(START_GAME);
-    }
-
-    public void printGameResultInMemory(String playerName, int playerScore, LocalDateTime dateOfGame) {
-
-        System.out.println(GAME_RESULT_IN_MEMORY.formatted(playerName, playerScore, dateOfGame));
     }
 
     public void printGameResultJsonFile(List<GameResult> gameResults) {

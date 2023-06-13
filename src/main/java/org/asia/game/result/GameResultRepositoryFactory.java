@@ -14,7 +14,10 @@ public class GameResultRepositoryFactory {
     }
 
     public GameResultRepositoryFactory(Destination destination) {
-        this.destination = destination;
+
+        if (destination != null) {
+            this.destination = destination;
+        } else throw new IllegalArgumentException();
     }
 
     public GameResultRepository newRepository() {
