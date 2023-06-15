@@ -23,7 +23,14 @@ public class GameResultRepositoryFactory {
     public GameResultRepository newRepository() {
 
         return switch (destination) {
-            case FILE -> new JsonFileRepository(Path.of(Config.FILE_PATH));
+            case FILE -> {
+                try {
+                    yield new JsonFileRepository(Path.of(Config.FILE_PATH));
+                } catch (GameRepositoryProcessingException e) {
+                    System.out.println("Cannot create Json file repository. Returning default");
+                    yield new InMemoryRepository();
+                }
+            }
             default -> new InMemoryRepository();
         };
     }

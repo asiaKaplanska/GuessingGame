@@ -16,8 +16,11 @@ class JsonFileRepository implements GameResultRepository {
 
     private final Path repositoryFilePath;
 
-    JsonFileRepository(Path repositoryFilePath) {
-        this.repositoryFilePath = repositoryFilePath;
+    JsonFileRepository(Path repositoryFilePath) throws GameRepositoryProcessingException {
+        if (repositoryFilePath != null) {
+            this.repositoryFilePath = repositoryFilePath;
+        } else throw new GameRepositoryProcessingException(
+                "Repository file paths cannot be null", new IllegalArgumentException());
     }
 
     @Override
