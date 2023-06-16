@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,9 +11,13 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.nio.file.Files.*;
+
 class JsonFileRepository implements GameResultRepository {
 
     private final Path repositoryFilePath;
+    private final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
+    private final String lineSeparator = System.lineSeparator();
 
     JsonFileRepository(Path repositoryFilePath) throws GameRepositoryProcessingException {
         if (repositoryFilePath != null) {
@@ -25,77 +28,61 @@ class JsonFileRepository implements GameResultRepository {
 
     @Override
     public void saveGameResult(GameResult gameResult) throws GameRepositoryProcessingException {
-
-        var mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-        try {
-            var json = mapper.writeValueAsString(gameResult);
-            System.out.println(json);
-            saveGameResultToFile(json);
-        } catch (JsonProcessingException e) {
-            throw new GameRepositoryProcessingException("Json serialization failed", e);
-        }
+        saveGameResultToFile(convertToJson(gameResult));
     }
 
     @Override
     public List<GameResult> getAllGameResults() throws GameRepositoryProcessingException {
+        return convertFromJson(loadResultsFile());
+    }
 
+    private List<GameResult> convertFromJson(List<String> json) throws GameRepositoryProcessingException {
         var gameResults = new ArrayList<GameResult>();
         try {
-            var mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-            var records = loadResultsFile().split(System.lineSeparator());
-
-            for (var r : records) {
+            for (var r : json) {
                 gameResults.add(mapper.readValue(r, GameResult.class));
             }
         } catch (JsonProcessingException exception) {
-            throw new GameRepositoryProcessingException("Json deserialization failed", exception);
+            throw new GameRepositoryProcessingException("Converting from json failed", exception);
         }
         return gameResults;
     }
 
-    private String loadResultsFile() throws GameRepositoryProcessingException {
+    private String convertToJson(GameResult gameResult) throws GameRepositoryProcessingException {
+        try {
+            return mapper.writeValueAsString(gameResult);
+        } catch (JsonProcessingException e) {
+            throw new GameRepositoryProcessingException("Converting to json failed", e);
+        }
+    }
 
-        try (var reader = Files.newBufferedReader(repositoryFilePath)) {
-            return readAllLines(reader);
+    private List<String> loadResultsFile() throws GameRepositoryProcessingException {
+        try {
+            return Files.readAllLines(repositoryFilePath);
         } catch (Exception e) {
             throw new GameRepositoryProcessingException("Loading Json file failed", e);
         }
     }
 
-    private String readAllLines(BufferedReader bufferedReader) throws IOException {
-
-        var content = new StringBuilder();
-        String line;
-
-        while ((line = bufferedReader.readLine()) != null) {
-            content.append(line);
-            content.append(System.lineSeparator());
-        }
-
-        return content.toString();
-    }
-
     private void saveGameResultToFile(String gameResult) throws GameRepositoryProcessingException {
-
         checkOrCreateDirectory();
         checkOrCreateFile();
 
         byte[] bytes = gameResult.getBytes();
         try (var outputStream = new FileOutputStream(repositoryFilePath.toFile(), true)) {
             outputStream.write(bytes);
-            outputStream.write(System.lineSeparator().getBytes());
+            outputStream.write(lineSeparator.getBytes());
         } catch (IOException e) {
             throw new GameRepositoryProcessingException("Saving Json file failed", e);
         }
     }
 
     private void checkOrCreateDirectory() throws GameRepositoryProcessingException {
-
         var parentPath = repositoryFilePath.getParent();
 
-        if (!Files.exists(parentPath)) {
+        if (!exists(parentPath)) {
             try {
-                Files.createDirectory(parentPath);
+                createDirectories(parentPath);
             } catch (IOException e) {
                 throw new GameRepositoryProcessingException("Creating new directory failed", e);
             }
@@ -103,10 +90,9 @@ class JsonFileRepository implements GameResultRepository {
     }
 
     private void checkOrCreateFile() throws GameRepositoryProcessingException {
-
-        if (!Files.exists(repositoryFilePath)) {
+        if (!exists(repositoryFilePath)) {
             try {
-                Files.createFile(repositoryFilePath);
+                createFile(repositoryFilePath);
             } catch (IOException e) {
                 throw new GameRepositoryProcessingException("Creating new file failed", e);
             }

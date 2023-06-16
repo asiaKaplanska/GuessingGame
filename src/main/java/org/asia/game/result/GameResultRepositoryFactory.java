@@ -1,8 +1,6 @@
 package org.asia.game.result;
 
-import org.asia.game.Config;
-
-import java.nio.file.Path;
+import static org.asia.game.Config.FILE_PATH;
 
 public class GameResultRepositoryFactory {
 
@@ -14,18 +12,17 @@ public class GameResultRepositoryFactory {
     }
 
     public GameResultRepositoryFactory(Destination destination) {
-
         if (destination != null) {
             this.destination = destination;
-        } else throw new IllegalArgumentException();
+        } else
+            throw new IllegalArgumentException("Destination cannot be null");
     }
 
     public GameResultRepository newRepository() {
-
         return switch (destination) {
             case FILE -> {
                 try {
-                    yield new JsonFileRepository(Path.of(Config.FILE_PATH));
+                    yield new JsonFileRepository(FILE_PATH);
                 } catch (GameRepositoryProcessingException e) {
                     System.out.println("Cannot create Json file repository. Returning default");
                     yield new InMemoryRepository();
@@ -34,6 +31,4 @@ public class GameResultRepositoryFactory {
             default -> new InMemoryRepository();
         };
     }
-
-
 }
