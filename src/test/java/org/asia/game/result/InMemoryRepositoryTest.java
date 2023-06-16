@@ -18,7 +18,6 @@ class InMemoryRepositoryTest {
     @DisplayName("Should correctly add new game result to list of results [positive]")
     @MethodSource("getGameResultsParameters")
     void saveGameResult(GameResult gameResult) {
-
         //when
         inMemoryRepository.saveGameResult(gameResult);
 
@@ -27,7 +26,6 @@ class InMemoryRepositoryTest {
     }
 
     private static Stream<Arguments> getGameResultsParameters() {
-
         return Stream.of(
                 Arguments.of(new GameResult("Player", 0, LocalDateTime.now())),
                 Arguments.of(new GameResult("Asia", 50, LocalDateTime.now())),
