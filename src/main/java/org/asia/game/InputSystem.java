@@ -61,6 +61,4 @@ public final class InputSystem {
 
         return userInputDecision;
     }
-
-
 }

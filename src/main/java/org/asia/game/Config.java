@@ -1,5 +1,7 @@
 package org.asia.game;
 
+import java.nio.file.Path;
+
 public class Config {
 
     public static final int MIN_VALUE_DRAWING = 1;
@@ -19,5 +21,8 @@ public class Config {
     public static final String YES_RESPONSE = "y";
     public static final String NO_RESPONSE = "n";
 
+    public static final String DIRECTORY_PATH = System.getProperty("user.home") + "/GameResults/";
+    public static final Path FILE_PATH = Path.of(DIRECTORY_PATH + "myFile.json");
 
+    public final static String REPOSITORY_DESTINATION_KEY = "RepositoryDestination";
 }

@@ -1,5 +1,9 @@
 package org.asia.game;
 
+import org.asia.game.result.GameRepositoryProcessingException;
+import org.asia.game.result.GameResult;
+import org.asia.game.result.GameResultRepository;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -10,6 +14,11 @@ public class GameLoop {
     private InputSystem inputSystem = InputSystem.getInstance();
     private NumberGenerator numberGenerator = new NumberGenerator();
     private ScoreSystem scoreSystem = new ScoreSystem();
+    private final GameResultRepository gameResultRepository;
+
+    public GameLoop(GameResultRepository gameResultRepository) {
+        this.gameResultRepository = gameResultRepository;
+    }
 
     public void playIntro() {
 
@@ -26,8 +35,11 @@ public class GameLoop {
 
     private void printAllPreviousResults() {
 
-        JSONFile jsonFile = new JSONFile();
-        jsonFile.deserialize();
+        try {
+            gameUI.printGameResultJsonFile(gameResultRepository.getAllGameResults());
+        } catch (GameRepositoryProcessingException exception) {
+            gameUI.printListNotExist();
+        }
     }
 
     public boolean playGame() {
@@ -61,8 +73,8 @@ public class GameLoop {
         gameUI.printCollectedPointsMessage(gameState.getUserName(), gameState.getUserScore());
         gameUI.printEmptyRow();
         GameResult gameResult = new GameResult(gameState.getUserName(), gameState.getUserScore(), LocalDateTime.now());
-        JSONFile jsonFile = new JSONFile();
-        jsonFile.serialise(gameResult);
+        saveResult(gameResult);
+
         gameUI.printEmptyRow();
 
         gameUI.printPreviousGameResults();
@@ -75,5 +87,15 @@ public class GameLoop {
         gameUI.printPlayAgainMessage();
         var userInput = inputSystem.getUserPlayingDecision();
         return Objects.equals(userInput, Config.YES_RESPONSE);
+    }
+
+    private void saveResult(GameResult gameResult) {
+
+        try {
+            gameResultRepository.saveGameResult(gameResult);
+        } catch (GameRepositoryProcessingException e) {
+            gameUI.printSavingFailed();
+        }
+
     }
 }

@@ -1,4 +1,4 @@
-package org.asia.game;
+package org.asia.game.result;
 
 import java.time.LocalDateTime;
 
