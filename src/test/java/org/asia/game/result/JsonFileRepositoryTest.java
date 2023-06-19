@@ -18,21 +18,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class JsonFileRepositoryTest {
 
-    JsonFileRepository jsonFileRepository;
-
     @ParameterizedTest
     @DisplayName("Should correctly add new game result to new list of results [positive]")
     @MethodSource("getGameResultsParameters")
     void saveGameResult_positive_newOnlyOneEntry(GameResult gameResult) throws GameRepositoryProcessingException, IOException {
         //given
         Path tempPath = createTempFile("test", ".json");
-        jsonFileRepository = new JsonFileRepository(tempPath);
+        var sut = new JsonFileRepository(tempPath);
 
         //when
-        jsonFileRepository.saveGameResult(gameResult);
+        sut.saveGameResult(gameResult);
 
         //then
-        assertTrue(jsonFileRepository.getAllGameResults().contains(gameResult));
+        assertTrue(sut.getAllGameResults().contains(gameResult));
     }
 
     private static Stream<Arguments> getGameResultsParameters() {
@@ -48,7 +46,7 @@ class JsonFileRepositoryTest {
     void saveGameResult_positive_existingEntries() throws GameRepositoryProcessingException, IOException {
         //given
         Path tempPath = createTempFile("test", ".json");
-        jsonFileRepository = new JsonFileRepository(tempPath);
+        var sut = new JsonFileRepository(tempPath);
         var gameResult = new GameResult("Player", 0, LocalDateTime.now());
         var secondGameResult = new GameResult("abc_1", 5000, LocalDateTime.now());
         var thirdGameResult = new GameResult("QWERTY", -2, LocalDateTime.now());
@@ -59,12 +57,12 @@ class JsonFileRepositoryTest {
         gameResultList.add(thirdGameResult);
 
         //when
-        jsonFileRepository.saveGameResult(gameResult);
-        jsonFileRepository.saveGameResult(secondGameResult);
-        jsonFileRepository.saveGameResult(thirdGameResult);
+        sut.saveGameResult(gameResult);
+        sut.saveGameResult(secondGameResult);
+        sut.saveGameResult(thirdGameResult);
 
         //then
-        assertTrue(jsonFileRepository.getAllGameResults().containsAll(gameResultList));
+        assertTrue(sut.getAllGameResults().containsAll(gameResultList));
     }
 
     @Test
@@ -72,7 +70,7 @@ class JsonFileRepositoryTest {
     void saveGameResult_negative_nullPath() {
         assertThrows(
                 GameRepositoryProcessingException.class,
-                () -> jsonFileRepository = new JsonFileRepository(null));
+                () ->  new JsonFileRepository(null));
     }
 
     @Test
@@ -81,11 +79,11 @@ class JsonFileRepositoryTest {
         //given
         var gameResult = new GameResult("Player", 123, LocalDateTime.now());
         Path tempPath = createTempDirectory("test");
-        jsonFileRepository = new JsonFileRepository(tempPath);
+        var sut = new JsonFileRepository(tempPath);
 
         //then
         assertThrows(
                 GameRepositoryProcessingException.class,
-                () -> jsonFileRepository.saveGameResult(gameResult));
+                () -> sut.saveGameResult(gameResult));
     }
 }

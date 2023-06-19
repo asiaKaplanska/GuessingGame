@@ -6,7 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +15,9 @@ import static java.nio.file.Files.*;
 
 class JsonFileRepository implements GameResultRepository {
 
+    private static final ObjectMapper MAPPER = new ObjectMapper().registerModule(new JavaTimeModule());
+    private static final String LINE_SEPARATOR = System.lineSeparator();
     private final Path repositoryFilePath;
-    private final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-    private final String lineSeparator = System.lineSeparator();
 
     JsonFileRepository(Path repositoryFilePath) throws GameRepositoryProcessingException {
         if (repositoryFilePath != null) {
@@ -40,7 +40,7 @@ class JsonFileRepository implements GameResultRepository {
         var gameResults = new ArrayList<GameResult>();
         try {
             for (var r : json) {
-                gameResults.add(mapper.readValue(r, GameResult.class));
+                gameResults.add(MAPPER.readValue(r, GameResult.class));
             }
         } catch (JsonProcessingException exception) {
             throw new GameRepositoryProcessingException("Converting from json failed", exception);
@@ -50,7 +50,7 @@ class JsonFileRepository implements GameResultRepository {
 
     private String convertToJson(GameResult gameResult) throws GameRepositoryProcessingException {
         try {
-            return mapper.writeValueAsString(gameResult);
+            return MAPPER.writeValueAsString(gameResult);
         } catch (JsonProcessingException e) {
             throw new GameRepositoryProcessingException("Converting to json failed", e);
         }
@@ -58,7 +58,7 @@ class JsonFileRepository implements GameResultRepository {
 
     private List<String> loadResultsFile() throws GameRepositoryProcessingException {
         try {
-            return Files.readAllLines(repositoryFilePath);
+            return readAllLines(repositoryFilePath, StandardCharsets.UTF_8);
         } catch (Exception e) {
             throw new GameRepositoryProcessingException("Loading Json file failed", e);
         }
@@ -68,10 +68,10 @@ class JsonFileRepository implements GameResultRepository {
         checkOrCreateDirectory();
         checkOrCreateFile();
 
-        byte[] bytes = gameResult.getBytes();
+        byte[] bytes = gameResult.getBytes(StandardCharsets.UTF_8);
         try (var outputStream = new FileOutputStream(repositoryFilePath.toFile(), true)) {
             outputStream.write(bytes);
-            outputStream.write(lineSeparator.getBytes());
+            outputStream.write(LINE_SEPARATOR.getBytes());
         } catch (IOException e) {
             throw new GameRepositoryProcessingException("Saving Json file failed", e);
         }
