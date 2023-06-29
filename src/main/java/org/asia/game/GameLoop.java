@@ -17,7 +17,7 @@ public class GameLoop {
     private NumberGenerator numberGenerator = new NumberGenerator();
     private ScoreSystem scoreSystem = new ScoreSystem();
     private final GameResultRepository gameResultRepository;
-    private static final Logger log = LoggerFactory.getLogger(Main.class);
+    private static final Logger log = LoggerFactory.getLogger(GameLoop.class);
 
     public GameLoop(GameResultRepository gameResultRepository) {
         this.gameResultRepository = gameResultRepository;
