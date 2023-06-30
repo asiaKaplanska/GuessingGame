@@ -30,7 +30,7 @@ public class PLConsoleGameUI implements GameUI {
     private static final String INPUT_NUMBERS = "Wprowadź liczbę!";
     private static final String PLAY_AGAIN = "Chcesz zagrać jeszcze raz? Jeśli TAK wpisz 'y' lub 'n' jeśli NIE";
     private static final String INPUT_PLAY_GAME_RESPONSE = "Wpisz 'y' lub 'n'!";
-    private static final String PREVIOUS_RESULTS = "Oto lista wyników prprzednich gier: ";
+    private static final String PREVIOUS_RESULTS = "Oto lista poprzednich wyników: ";
     private static final String START_GAME = "Zaczynajmy!";
 
     @Override

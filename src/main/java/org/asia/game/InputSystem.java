@@ -1,5 +1,8 @@
 package org.asia.game;
 
+import org.asia.game.ui.ConsoleGameUIFactory;
+import org.asia.game.ui.GameUI;
+
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -7,7 +10,8 @@ public final class InputSystem {
 
     private static InputSystem instance;
     private Scanner scanner = new Scanner(System.in);
-    private GameUI gameUI = new GameUI();
+    private ConsoleGameUIFactory uiFactory = new ConsoleGameUIFactory(Config.language);
+    private GameUI gameUI = uiFactory.newGameUI();
 
     private InputSystem() {
     }
