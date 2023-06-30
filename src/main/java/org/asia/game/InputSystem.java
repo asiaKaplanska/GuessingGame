@@ -13,7 +13,6 @@ public final class InputSystem {
     }
 
     public static InputSystem getInstance() {
-
         if (instance == null) {
             instance = new InputSystem();
         }
@@ -21,7 +20,6 @@ public final class InputSystem {
     }
 
     public int getUserIntegerInput() {
-
         boolean success = false;
         String userInputAsString;
         var userInputAsInteger = 0;
@@ -41,12 +39,10 @@ public final class InputSystem {
 
 
     public String getUserName() {
-
         return scanner.nextLine();
     }
 
     public String getUserPlayingDecision() {
-
         boolean success = false;
         String userInputDecision;
 

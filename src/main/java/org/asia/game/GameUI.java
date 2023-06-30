@@ -30,90 +30,64 @@ public class GameUI {
     private static final String INPUT_PLAY_GAME_RESPONSE = "You can only enter 'y' or 'n'!";
     private static final String PREVIOUS_RESULTS = "Here are all the results of previous games: ";
     private static final String START_GAME = "Let's start!";
-    private static final String SAVING_RESULT_FAILED = "Saving failed";
-    private static final String LIST_NOT_EXIST = "List of results don't exist";
-
-    public void printListNotExist() {
-
-        System.out.println(LIST_NOT_EXIST);
-    }
-    public void printSavingFailed() {
-
-        System.out.println(SAVING_RESULT_FAILED);
-    }
 
     public void printInsertInputMessage() {
-
         System.out.print(INSERT_USER_INPUT);
     }
 
     public void printGameDescriptionMessage() {
-
         System.out.println(GAME_DESCRIPTION);
     }
 
     public void printInsertUserNameMessage() {
-
         System.out.println(INSERT_USER_NAME);
     }
 
     public void printDrawnNumber(int number) {
-
         System.out.println(DRAWN_NUMBER.formatted(number));
     }
 
     public void printCollectedPointsMessage(String userName, int points) {
-
         System.out.print(POINTS.formatted(userName, points));
     }
 
     public void printDottedLine() {
-
         System.out.println("* ".repeat(50));
     }
 
     public void printEmptyRow() {
-
         System.out.println();
     }
 
     public void printGreetingUserMessage(GameState gameState) {
-
         System.out.println(GREETING_USER.formatted(gameState.getUserName()));
     }
 
     public void printRoundMessage(int round) {
-
         System.out.print(ROUND + round);
     }
 
     public void printOnlyNumbersMessage() {
-
         System.out.println(INPUT_NUMBERS);
     }
 
     public void printPlayAgainMessage() {
-
         System.out.println(PLAY_AGAIN);
     }
 
     public void printResponseWarningExceptionMessage() {
-
         System.out.println(INPUT_PLAY_GAME_RESPONSE);
     }
 
     public void printPreviousGameResults() {
-
         System.out.print(PREVIOUS_RESULTS);
     }
 
     public void printLetsStart() {
-
         System.out.println(START_GAME);
     }
 
     public void printGameResultJsonFile(List<GameResult> gameResults) {
-
         for (var result : gameResults)
         {
             System.out.println(result.toString());
