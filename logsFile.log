@@ -19,3 +19,14 @@
 7860 [main] INFO  org.asia.game.GameLoop - 4. round user number: 1 and generated number: 7
 7860 [main] INFO  org.asia.game.GameLoop - Current user score: 20
 7862 [main] INFO  org.asia.game.GameLoop - Player Asia2 has scored a total of 20 points
+345  [main] INFO  org.asia.game.Main - Starting game with args = []
+7958 [main] INFO  org.asia.game.GameLoop - Username is set to qwerty
+10145 [main] INFO  org.asia.game.GameLoop - 1. round user number: 1 and generated number: 4
+10146 [main] INFO  org.asia.game.GameLoop - Current user score: 0
+12004 [main] INFO  org.asia.game.GameLoop - 2. round user number: 2 and generated number: 7
+12004 [main] INFO  org.asia.game.GameLoop - Current user score: 0
+14316 [main] INFO  org.asia.game.GameLoop - 3. round user number: 3 and generated number: 4
+14316 [main] INFO  org.asia.game.GameLoop - Current user score: 0
+16144 [main] INFO  org.asia.game.GameLoop - 4. round user number: 4 and generated number: 2
+16144 [main] INFO  org.asia.game.GameLoop - Current user score: 0
+16146 [main] INFO  org.asia.game.GameLoop - Player qwerty has scored a total of 0 points
