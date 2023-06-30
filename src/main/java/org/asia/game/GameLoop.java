@@ -74,6 +74,7 @@ public class GameLoop {
         gameUI.printEmptyRow();
         GameResult gameResult = new GameResult(gameState.getUserName(), gameState.getUserScore(), LocalDateTime.now());
         saveResult(gameResult);
+        log.info("Player {} has scored a total of {} points", gameResult.playerName(), gameResult.playerScore());
 
         gameUI.printEmptyRow();
 
