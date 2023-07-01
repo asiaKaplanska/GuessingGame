@@ -1,6 +1,7 @@
 package org.asia.game;
 
 import org.asia.game.result.GameResultRepositoryFactory;
+import org.asia.game.ui.ConsoleGameUIFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +14,8 @@ public class Main {
 
     public static void main(String[] args) {
         var repoFactory = new GameResultRepositoryFactory(loadDestinationFromArgs(args));
-        GameLoop gameLoop = new GameLoop(repoFactory.newRepository());
+        var uiFactory = new ConsoleGameUIFactory(Config.LANGUAGE);
+        GameLoop gameLoop = new GameLoop(repoFactory.newRepository(), uiFactory.newGameUI());
         boolean playingGame = true;
         log.info("Starting game with args = {}", Arrays.stream(args).toList());
         gameLoop.playIntro();

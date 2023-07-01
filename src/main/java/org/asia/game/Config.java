@@ -28,5 +28,5 @@ public class Config {
 
     public final static String REPOSITORY_DESTINATION_KEY = "RepositoryDestination";
 
-    public static final ConsoleGameUIFactory.Language language = ConsoleGameUIFactory.Language.EN;
+    public static final ConsoleGameUIFactory.Language LANGUAGE = ConsoleGameUIFactory.Language.EN;
 }

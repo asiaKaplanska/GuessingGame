@@ -6,7 +6,7 @@ import org.asia.game.result.GameResult;
 
 import java.util.List;
 
-public class PLConsoleGameUI implements GameUI {
+class PLConsoleGameUI implements GameUI {
 
     private static final String INSERT_USER_INPUT = ", podaj liczbę jajek >>> ";
     private static final String GAME_DESCRIPTION = """

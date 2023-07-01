@@ -3,7 +3,6 @@ package org.asia.game;
 import org.asia.game.result.GameRepositoryProcessingException;
 import org.asia.game.result.GameResult;
 import org.asia.game.result.GameResultRepository;
-import org.asia.game.ui.ConsoleGameUIFactory;
 import org.asia.game.ui.GameUI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,16 +13,16 @@ import java.util.Objects;
 public class GameLoop {
 
     private GameState gameState;
-    private ConsoleGameUIFactory uiFactory = new ConsoleGameUIFactory(Config.language);
-    private GameUI gameUI = uiFactory.newGameUI();
+    private final GameUI gameUI;
     private InputSystem inputSystem = InputSystem.getInstance();
     private NumberGenerator numberGenerator = new NumberGenerator();
     private ScoreSystem scoreSystem = new ScoreSystem();
     private final GameResultRepository gameResultRepository;
     private static final Logger log = LoggerFactory.getLogger(GameLoop.class);
 
-    public GameLoop(GameResultRepository gameResultRepository) {
+    public GameLoop(GameResultRepository gameResultRepository, GameUI gameUI) {
         this.gameResultRepository = gameResultRepository;
+        this.gameUI = gameUI;
     }
 
     public void playIntro() {

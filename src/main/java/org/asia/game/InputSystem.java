@@ -10,7 +10,7 @@ public final class InputSystem {
 
     private static InputSystem instance;
     private Scanner scanner = new Scanner(System.in);
-    private ConsoleGameUIFactory uiFactory = new ConsoleGameUIFactory(Config.language);
+    private ConsoleGameUIFactory uiFactory = new ConsoleGameUIFactory(Config.LANGUAGE);
     private GameUI gameUI = uiFactory.newGameUI();
 
     private InputSystem() {

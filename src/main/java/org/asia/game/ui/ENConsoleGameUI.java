@@ -6,7 +6,7 @@ import org.asia.game.result.GameResult;
 
 import java.util.List;
 
-public class ENConsoleGameUI implements GameUI {
+class ENConsoleGameUI implements GameUI {
 
     private static final String INSERT_USER_INPUT = ", enter the number of eggs >>> ";
     private static final String GAME_DESCRIPTION = """
