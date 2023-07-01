@@ -14,15 +14,16 @@ public class GameLoop {
 
     private GameState gameState;
     private final GameUI gameUI;
-    private InputSystem inputSystem = InputSystem.getInstance();
+    private InputSystem inputSystem;
     private NumberGenerator numberGenerator = new NumberGenerator();
     private ScoreSystem scoreSystem = new ScoreSystem();
     private final GameResultRepository gameResultRepository;
     private static final Logger log = LoggerFactory.getLogger(GameLoop.class);
 
-    public GameLoop(GameResultRepository gameResultRepository, GameUI gameUI) {
+    public GameLoop(GameResultRepository gameResultRepository, GameUI gameUI, InputSystem inputSystem) {
         this.gameResultRepository = gameResultRepository;
         this.gameUI = gameUI;
+        this.inputSystem = inputSystem;
     }
 
     public void playIntro() {

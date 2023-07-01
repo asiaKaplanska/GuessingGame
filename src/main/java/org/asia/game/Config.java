@@ -1,7 +1,5 @@
 package org.asia.game;
 
-import org.asia.game.ui.ConsoleGameUIFactory;
-
 import java.nio.file.Path;
 
 public class Config {
@@ -26,7 +24,7 @@ public class Config {
     public static final String DIRECTORY_PATH = System.getProperty("user.home") + "/GameResults/";
     public static final Path FILE_PATH = Path.of(DIRECTORY_PATH + "myFile.json");
 
-    public final static String REPOSITORY_DESTINATION_KEY = "RepositoryDestination";
+    public static final String REPOSITORY_DESTINATION_KEY = "RepositoryDestination";
 
-    public static final ConsoleGameUIFactory.Language LANGUAGE = ConsoleGameUIFactory.Language.EN;
+    public static final String LANGUAGE_KEY = "Language";
 }
