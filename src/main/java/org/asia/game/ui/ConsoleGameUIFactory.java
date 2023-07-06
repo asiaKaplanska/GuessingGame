@@ -20,9 +20,10 @@ public class ConsoleGameUIFactory {
     }
 
     public GameUI newGameUI() {
+
         return switch (language) {
-            case PL -> new PLConsoleGameUI();
-            default -> new ENConsoleGameUI();
+            case PL -> new BaseConsoleUI(new PLConsoleGameTexts());
+            default -> new BaseConsoleUI(new ENConsoleGameTexts());
         };
     }
 }
