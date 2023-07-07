@@ -22,8 +22,8 @@ public class ConsoleGameUIFactory {
     public GameUI newGameUI() {
 
         return switch (language) {
-            case PL -> new BaseConsoleUI(new PLConsoleGameTexts());
-            default -> new BaseConsoleUI(new ENConsoleGameTexts());
+            case PL -> new ConsoleUI(new PLBaseConsoleGameTexts());
+            default -> new ConsoleUI(new ENBaseConsoleGameTexts());
         };
     }
 }

@@ -5,33 +5,33 @@ import org.asia.game.result.GameResult;
 
 import java.util.List;
 
-public class BaseConsoleUI implements GameUI {
+ class ConsoleUI implements GameUI {
 
-    private final ConsoleTexts consoleTexts;
+    private final BaseConsoleTexts baseConsoleTexts;
 
-    public BaseConsoleUI(ConsoleTexts consoleTexts) {
-        this.consoleTexts = consoleTexts;
+    public ConsoleUI(BaseConsoleTexts baseConsoleTexts) {
+        this.baseConsoleTexts = baseConsoleTexts;
     }
 
     @Override
     public void printInsertInputMessage() {
-        System.out.print(consoleTexts.getInsertUserInput());
+        System.out.print(baseConsoleTexts.getInsertUserInput());
     }
     @Override
     public void printGameDescriptionMessage() {
-        System.out.println(consoleTexts.getGameDescription());
+        System.out.println(baseConsoleTexts.getGameDescription());
     }
     @Override
     public void printInsertUserNameMessage() {
-        System.out.println(consoleTexts.getInsertUserName());
+        System.out.println(baseConsoleTexts.getInsertUserName());
     }
     @Override
     public void printDrawnNumber(int number) {
-        System.out.println(consoleTexts.getDrawnNumber().formatted(number));
+        System.out.println(baseConsoleTexts.getDrawnNumber().formatted(number));
     }
     @Override
     public void printCollectedPointsMessage(String userName, int points) {
-        System.out.print(consoleTexts.getPoints().formatted(userName, points));
+        System.out.print(baseConsoleTexts.getPoints().formatted(userName, points));
     }
     @Override
     public void printDottedLine() {
@@ -43,31 +43,31 @@ public class BaseConsoleUI implements GameUI {
     }
     @Override
     public void printGreetingUserMessage(GameState gameState) {
-        System.out.println(consoleTexts.getGreetingUser().formatted(gameState.getUserName()));
+        System.out.println(baseConsoleTexts.getGreetingUser().formatted(gameState.getUserName()));
     }
     @Override
     public void printRoundMessage(int round) {
-        System.out.print(consoleTexts.getRound() + round);
+        System.out.print(baseConsoleTexts.getRound() + round);
     }
     @Override
     public void printOnlyNumbersMessage() {
-        System.out.println(consoleTexts.getInputNumbers());
+        System.out.println(baseConsoleTexts.getInputNumbers());
     }
     @Override
     public void printPlayAgainMessage() {
-        System.out.println(consoleTexts.getPlayAgain());
+        System.out.println(baseConsoleTexts.getPlayAgain());
     }
     @Override
     public void printResponseWarningExceptionMessage() {
-        System.out.println(consoleTexts.getInputPlayGameResponse());
+        System.out.println(baseConsoleTexts.getInputPlayGameResponse());
     }
     @Override
     public void printPreviousGameResults() {
-        System.out.print(consoleTexts.getPreviousResults());
+        System.out.print(baseConsoleTexts.getPreviousResults());
     }
     @Override
     public void printLetsStart() {
-        System.out.println(consoleTexts.getStartGame());
+        System.out.println(baseConsoleTexts.getStartGame());
     }
     @Override
     public void printGameResultJsonFile(List<GameResult> gameResults) {

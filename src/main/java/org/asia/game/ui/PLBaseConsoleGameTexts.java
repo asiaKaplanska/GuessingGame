@@ -2,7 +2,7 @@ package org.asia.game.ui;
 
 import org.asia.game.Config;
 
-class PLConsoleGameTexts extends ConsoleTexts{
+class PLBaseConsoleGameTexts extends BaseConsoleTexts {
 
     private final String insertUserInput = ", podaj liczbę jajek >>> ";
     private final String gameDescription = """

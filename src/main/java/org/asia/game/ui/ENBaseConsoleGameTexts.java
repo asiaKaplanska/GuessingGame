@@ -2,7 +2,7 @@ package org.asia.game.ui;
 
 import org.asia.game.Config;
 
-class ENConsoleGameTexts extends ConsoleTexts {
+class ENBaseConsoleGameTexts extends BaseConsoleTexts {
 
     private final String insertUserInput = ", enter the number of eggs >>> ";
     private final String gameDescription = """
