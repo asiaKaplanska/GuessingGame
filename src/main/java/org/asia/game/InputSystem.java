@@ -1,22 +1,17 @@
 package org.asia.game;
 
+import org.asia.game.ui.GameUI;
+
 import java.util.Objects;
 import java.util.Scanner;
 
-public final class InputSystem {
+public class InputSystem {
 
-    private static InputSystem instance;
     private Scanner scanner = new Scanner(System.in);
-    private GameUI gameUI = new GameUI();
+    private final GameUI gameUI;
 
-    private InputSystem() {
-    }
-
-    public static InputSystem getInstance() {
-        if (instance == null) {
-            instance = new InputSystem();
-        }
-        return instance;
+    public InputSystem(GameUI gameUI) {
+        this.gameUI = gameUI;
     }
 
     public int getUserIntegerInput() {
@@ -36,7 +31,6 @@ public final class InputSystem {
 
        return userInputAsInteger;
     }
-
 
     public String getUserName() {
         return scanner.nextLine();

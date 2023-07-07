@@ -24,5 +24,7 @@ public class Config {
     public static final String DIRECTORY_PATH = System.getProperty("user.home") + "/GameResults/";
     public static final Path FILE_PATH = Path.of(DIRECTORY_PATH + "myFile.json");
 
-    public final static String REPOSITORY_DESTINATION_KEY = "RepositoryDestination";
+    public static final String REPOSITORY_DESTINATION_KEY = "RepositoryDestination";
+
+    public static final String LANGUAGE_KEY = "Language";
 }
