@@ -18,7 +18,15 @@ public class Main {
         var uiFactory = new ConsoleGameUIFactory(loadLanguageFromArgs(args));
         var gameUI = uiFactory.newGameUI();
         var inputSystem = new InputSystem(gameUI);
-        GameLoop gameLoop = new GameLoop(repoFactory.newRepository(), gameUI, inputSystem);
+
+        GameLoop gameLoop = GameLoop.builder()
+                .setGameResultRepository(repoFactory.newRepository())
+                .setGameUI(gameUI)
+                .setInputSystem(inputSystem)
+                .setNumberGenerator(new NumberGenerator())
+                .setScoreSystem(new ScoreSystem())
+                .build();
+
         boolean playingGame = true;
         log.info("Starting game with args = {}", Arrays.stream(args).toList());
         gameLoop.playIntro();
