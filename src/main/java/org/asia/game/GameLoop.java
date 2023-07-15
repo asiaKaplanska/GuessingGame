@@ -14,16 +14,23 @@ public class GameLoop {
 
     private GameState gameState;
     private final GameUI gameUI;
-    private InputSystem inputSystem;
-    private NumberGenerator numberGenerator = new NumberGenerator();
-    private ScoreSystem scoreSystem = new ScoreSystem();
+    private final InputSystem inputSystem;
+    private final NumberGenerator numberGenerator;
+    private final ScoreSystem scoreSystem;
     private final GameResultRepository gameResultRepository;
     private static final Logger log = LoggerFactory.getLogger(GameLoop.class);
 
-    public GameLoop(GameResultRepository gameResultRepository, GameUI gameUI, InputSystem inputSystem) {
+    public static GameLoopBuilder builder() {
+        return new GameLoopBuilder();
+    }
+
+    GameLoop(GameResultRepository gameResultRepository, GameUI gameUI, InputSystem inputSystem,
+             NumberGenerator numberGenerator, ScoreSystem scoreSystem) {
         this.gameResultRepository = gameResultRepository;
         this.gameUI = gameUI;
         this.inputSystem = inputSystem;
+        this.numberGenerator = numberGenerator;
+        this.scoreSystem = scoreSystem;
     }
 
     public void playIntro() {
