@@ -24,8 +24,8 @@ public class GameLoop {
         return new GameLoopBuilder();
     }
 
-    public GameLoop(GameResultRepository gameResultRepository, GameUI gameUI, InputSystem inputSystem,
-                    NumberGenerator numberGenerator, ScoreSystem scoreSystem) {
+    GameLoop(GameResultRepository gameResultRepository, GameUI gameUI, InputSystem inputSystem,
+             NumberGenerator numberGenerator, ScoreSystem scoreSystem) {
         this.gameResultRepository = gameResultRepository;
         this.gameUI = gameUI;
         this.inputSystem = inputSystem;

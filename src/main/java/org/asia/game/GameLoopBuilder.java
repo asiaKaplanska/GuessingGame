@@ -3,6 +3,9 @@ package org.asia.game;
 import org.asia.game.result.GameResultRepository;
 import org.asia.game.ui.GameUI;
 
+import java.util.Objects;
+import java.util.stream.Stream;
+
 public class GameLoopBuilder {
 
     private GameUI gameUI;
@@ -37,6 +40,9 @@ public class GameLoopBuilder {
     }
 
     public GameLoop build() {
-        return new GameLoop(gameResultRepository, gameUI, inputSystem, numberGenerator, scoreSystem);
+        if (Stream.of(gameResultRepository, gameUI, inputSystem, numberGenerator, scoreSystem).anyMatch(Objects::isNull)) {
+            throw new IllegalArgumentException("All GameLoop parameters have to be initialized");
+        }
+            return new GameLoop(gameResultRepository, gameUI, inputSystem, numberGenerator, scoreSystem);
     }
 }
